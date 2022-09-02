@@ -1,31 +1,17 @@
-var num = -55;
-var result = Math.abs(num);
-console.log(result);
+setInterval(setClock,1000);
+const hourHand = document.querySelector('[data-hour-hand]')
+const minutesHand = document.querySelector('[data-minute-hand]')
+const secondHand = document.querySelector('[data-second-hand]')
 
-var num = 4343.33434343;
-var result = Math.round(num);
-console.log(num);
-
-var num = 43.55;
-var result = Math.ceil(num);
-console.log(result);
-
-var num = 3.0004;
-var result = Math.floor(num);
-console.log(result);
-
-var num = 3.34434;
-var result = Math.random(num);
-console.log(result);
-
-var num = Math.random() * 10;
-var result =Math.round(num);
-console.log(result);
-
-var num = Math.random() * 10;
-var result = num.toFixed(3);
-console.log(result);
-
-var num = Math.random() * 10;
-var result = num.toPrecision(1);
-console.log(result);
+function setClock(){
+    const currentDate = new Date();
+    const secondsRatio =currentDate.getSeconds()/60;
+    const minutesRatio = (secondsRatio + currentDate.getMinutes())/60;
+    const hourRatio =(minutesRatio + currentDate.getHours())/12;
+    setRotation(secondHand,secondsRatio)
+    setRotation(minutesHand,minutesRatio)
+    setRotation(hourHand,hourRatio)
+}
+function setRotation(element, rotationRatio){
+    element.style.setProperty('--rotation',rotationRatio*360)
+}
